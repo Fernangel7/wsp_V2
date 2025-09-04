@@ -1,1 +1,1 @@
-Instalar extension ESLint para modificar el backend apropiadamente
+Instalar extension ESLint de Microsoft para modificar el backend apropiadamente
