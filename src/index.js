@@ -4,6 +4,7 @@ export const createAPP = (
     createServer,
     Server,
     corsMiddleware,
+    ACCEPTED_ORIGINS,
     jsonMiddleware,
     urlencodedMiddleware,
     cookieParser,
@@ -24,31 +25,21 @@ export const createAPP = (
   app.set('views', 'src/views')
 
   app.get('/', (req, res) => {
-    const token = req.cookies.refeshToken
+    authLogin(req, res)
 
-    if (!token) {
-      res.redirect('/login')
-    }
-
-    try {
-      if (!jwt.verify(token, JWT_SECRET_KEY)) {
-        res.redirect('/login')
-      }
-    } catch (e) {
-      res.clearCookie('refeshToken', {
-        sign: true,
-        httpOnly: true,
-        secure: true,
-        sameSite: 'Strict'
-      })
-      res.redirect('/login')
-    }
-
-    res.render('index')
+    res.redirect('/chat')
   })
 
   app.get('/login', (req, res) => {
     res.render('login')
+  })
+
+  app.get('/chat', (req, res) => {
+    authLogin(req, res)
+
+    io.emit('open chat service', { data: {} })
+
+    res.render('index')
   })
 
   app.post('/signin', (req, res) => {
@@ -69,7 +60,46 @@ export const createAPP = (
     //  asd
   })
 
-  app.listen(PORT, () => {
+  const server = createServer(app)
+  const io = new Server(server, {
+    cors: {
+      origin: ACCEPTED_ORIGINS,
+      methods: ['GET']
+    }
+  })
+
+  io.on('connection', (socket) => {
+    console.log('Cliente Conectado')
+
+    socket.on('open chat service', (data) => {
+      console.log('inicio de chat')
+      console.log('it says: ' + JSON.stringify(data))
+    })
+  })
+
+  server.listen(PORT, () => {
     console.log(`Server running on PORT ${PORT}`)
   })
+
+  const authLogin = (req, res) => {
+    const token = req.cookies.refeshToken
+
+    if (!token) {
+      res.redirect('/login')
+    }
+
+    try {
+      if (!jwt.verify(token, JWT_SECRET_KEY)) {
+        res.redirect('/login')
+      }
+    } catch (e) {
+      res.clearCookie('refeshToken', {
+        sign: true,
+        httpOnly: true,
+        secure: true,
+        sameSite: 'Strict'
+      })
+      res.redirect('/login')
+    }
+  }
 }
