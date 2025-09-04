@@ -1,6 +1,6 @@
 import cors from 'cors'
 
-const ACCEPTED_ORIGINS = [
+export const ACCEPTED_ORIGINS = [
   'http://localhost:3000'
 ]
 
