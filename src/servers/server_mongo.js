@@ -1,7 +1,7 @@
 import express from 'express'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
-import corsMiddleware from '../middlewares/cors.js'
+import corsMiddleware, { ACCEPTED_ORIGINS } from '../middlewares/cors.js'
 import jsonMiddleware from '../middlewares/json.js'
 import urlencodedMiddleware from '../middlewares/urlencoded.js'
 import cookieParser from 'cookie-parser'
@@ -17,6 +17,7 @@ createAPP(
     createServer,
     Server,
     corsMiddleware,
+    ACCEPTED_ORIGINS,
     jsonMiddleware,
     urlencodedMiddleware,
     cookieParser,
