@@ -3,29 +3,22 @@ import { mongooseUserSchema } from '../../schemas/mongoose/user.js'
 import { connectDB } from './mongoose.js'
 
 export class UserModel {
-  constructor (_id, name, mail, password, userID) {
-    this._id = _id
-    this.name = name
-    this.mail = mail
-    this.password = password
-    this.userID = userID
-  }
-
-  static async addUser () {
+  static async addUser (_id, name, mail, password, userID) {
     try {
       connectDB()
 
       const MongooseUserModel = mongoose.model('UserModel', mongooseUserSchema)
 
       const newUser = new MongooseUserModel({
-        _id: this._id,
-        name: this.name,
-        mail: this.mail,
-        password: this.password,
-        userID: this.userID
+        _id: [_id],
+        name: [name],
+        mail: [mail],
+        password: [password],
+        userID: [userID]
       })
 
       await newUser.save()
+      return true
     } catch (error) {
       throw new Error('Error al registrar el usuario')
     }
