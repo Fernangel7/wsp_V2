@@ -8,7 +8,7 @@
     "WSP V2",
     "WhatsApp"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "author": "Fernangel7",
   "type": "module",
   "main": "src/servers/server_mongo.js",
@@ -25,7 +25,7 @@
     "ejs": "3.1.10",
     "express": "5.1.0",
     "jsonwebtoken": "9.0.2",
-    "mongodb": "6.19.0",
+    "mongoose": "8.18.0",
     "socket.io": "4.8.1",
     "zod": "4.1.5"
   },
