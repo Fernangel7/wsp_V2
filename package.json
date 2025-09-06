@@ -8,7 +8,7 @@
     "WSP V2",
     "WhatsApp"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "author": "Fernangel7",
   "type": "module",
   "main": "src/servers/server_mongo.js",
