@@ -11,7 +11,7 @@ export class UserModel {
     this.userID = userID
   }
 
-  async addUser () {
+  static async addUser () {
     try {
       connectDB()
 
