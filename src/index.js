@@ -22,7 +22,7 @@ export const createAPP = (
   app.use(cookieParser(COOKIE_SECRET_KEY))
 
   app.set('view engine', 'ejs')
-  app.set('views', 'src/views')
+  app.set('views', 'public/views')
 
   app.get('/', (req, res) => {
     authLogin(req, res)
@@ -39,7 +39,7 @@ export const createAPP = (
 
     io.emit('open chat service', { data: {} })
 
-    res.render('index')
+    res.render('index', { theme: ['Light', 'Dark'][1] })
   })
 
   app.post('/signin', (req, res) => {
