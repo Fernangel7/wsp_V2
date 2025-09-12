@@ -5,7 +5,7 @@ const zodUserSchema = z.object({
   name: z.string().nonoptional(),
   mail: z.email().nonoptional(),
   password: z.string().minLength(12).nonoptional(),
-  userID: z.number().int().nonoptional()
+  userUUID: z.number().int().nonoptional()
 })
 
 export async function partialUserValidation ({ data }) {
