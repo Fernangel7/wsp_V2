@@ -11,9 +11,10 @@
   "license": "MIT",
   "author": "Fernangel7",
   "type": "module",
-  "main": "src/servers/server_mongo.js",
+  "main": ".",
   "scripts": {
-    "dev": "nodemon src/servers/server_mongo.js",
+    "server:mongo": "nodemon src/servers/server_mongo.js",
+    "server:mysql": "nodemon src/servers/server_mysql.js",
     "start": "node ."
   },
   "dependencies": {
