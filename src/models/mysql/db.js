@@ -1,10 +1,10 @@
-import mysql from 'mysql2/promise';
+import mysql from 'mysql2/promise'
 
 export const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'sql_workbench'
+  password: '1234',
+  database: 'wspv2'
 })
 
 connection.connect(error => {
