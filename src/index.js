@@ -44,6 +44,16 @@ export const createAPP = (
     res.render('index', { theme: ['Light', 'Dark'][1] })
   })
 
+  app.get('/r', (req, res) => {
+    res.clearCookie('refeshToken', {
+      sign: true,
+      httpOnly: true,
+      secure: true,
+      sameSite: 'Strict'
+    })
+    res.redirect('/')
+  })
+
   app.post('/signin', (req, res) => {
     res.cookie('refeshToken', jwt.sign({
       ...req.body
