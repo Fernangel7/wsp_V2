@@ -1,0 +1,229 @@
+/* Variables de colores para el Tema Oscuro */
+:root {
+    --color-fondo-principal: #0b141a;
+    /* Fondo principal del chat (oscuro) */
+    --color-fondo-panel: #111b21;
+    /* Fondo de los paneles y barras */
+    --color-barra-chat: #202c33;
+    /* Fondo de cabeceras y pie de página */
+    --color-barra-mensajes: #2a3942;
+    /* Fondo del buscador y barra de mensajes */
+    --color-mensaje-recibido: #202c33;
+    /* Fondo de burbuja de mensaje recibido */
+    --color-mensaje-enviado: #005c4b;
+    /* Fondo de burbuja de mensaje enviado */
+    --color-texto-oscuro: #e9edef;
+    /* Color de texto principal (claro) */
+    --color-texto-claro: #8696a0;
+    /* Color de texto secundario (gris claro) */
+    --color-gris-claro: #aebac1;
+    /* Color de iconos y texto terciario */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-fondo-principal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal del layout */
+.whatsapp-container {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    background-color: var(--color-fondo-panel);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--color-texto-oscuro);
+}
+
+/* Panel Izquierdo: Lista de Chats */
+.panel-chats {
+    flex: 0.35;
+    background-color: var(--color-fondo-panel);
+    border-right: 1px solid var(--color-barra-chat);
+    display: flex;
+    flex-direction: column;
+}
+
+.header-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--color-barra-chat);
+}
+
+.avatar {
+    background-color: var(--color-gris-claro);
+    /* Se mantiene igual */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.iconos {
+    color: var(--color-gris-claro);
+    font-size: 1.2rem;
+}
+
+.iconos i {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.buscador {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--color-barra-mensajes);
+}
+
+.buscador i {
+    color: var(--color-gris-claro);
+    margin-right: 10px;
+}
+
+.buscador input {
+    flex-grow: 1;
+    border: none;
+    padding: 8px;
+    border-radius: 20px;
+    background-color: var(--color-barra-chat);
+    color: var(--color-texto-oscuro);
+    outline: none;
+}
+
+.buscador input::placeholder {
+    color: var(--color-gris-claro);
+}
+
+.lista-chats {
+    overflow-y: auto;
+}
+
+.chat-item {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid var(--color-barra-mensajes);
+    cursor: pointer;
+}
+
+.chat-item:hover {
+    background-color: var(--color-barra-mensajes);
+}
+
+.chat-item.activo {
+    background-color: #2a3f4e;
+}
+
+.info-chat {
+    margin-left: 15px;
+    flex-grow: 1;
+}
+
+.nombre-chat {
+    font-weight: bold;
+    color: var(--color-texto-oscuro);
+}
+
+.ultimo-mensaje {
+    color: var(--color-texto-claro);
+    font-size: 0.9rem;
+}
+
+.hora {
+    font-size: 0.8rem;
+    color: var(--color-gris-claro);
+}
+
+/* Panel Derecho: Área de Chat */
+.panel-chat {
+    flex: 0.65;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-chat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--color-barra-chat);
+    border-left: 1px solid var(--color-barra-chat);
+}
+
+.info-contacto {
+    display: flex;
+    align-items: center;
+}
+
+.info-contacto .avatar {
+    margin-right: 15px;
+}
+
+.nombre-contacto {
+    font-weight: bold;
+    color: var(--color-texto-oscuro);
+}
+
+.cuerpo-chat {
+    flex-grow: 1;
+    background-color: var(--color-fondo-principal);
+    padding: 20px 80px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.mensaje-recibido,
+.mensaje-enviado {
+    padding: 8px 12px;
+    border-radius: 7.5px;
+    margin-bottom: 8px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.mensaje-recibido {
+    background-color: var(--color-mensaje-recibido);
+    color: var(--color-texto-oscuro);
+    align-self: flex-start;
+}
+
+.mensaje-enviado {
+    background-color: var(--color-mensaje-enviado);
+    color: var(--color-texto-oscuro);
+    align-self: flex-end;
+}
+
+.footer-chat {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--color-barra-mensajes);
+}
+
+.footer-chat i {
+    font-size: 1.5rem;
+    color: var(--color-gris-claro);
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.footer-chat input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    outline: none;
+    background-color: var(--color-barra-chat);
+    color: var(--color-texto-oscuro);
+}
+
+.footer-chat input::placeholder {
+    color: var(--color-gris-claro);
+}
