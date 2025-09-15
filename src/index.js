@@ -6,6 +6,8 @@ import jsonMiddleware from './middlewares/json.js'
 import urlencodedMiddleware from './middlewares/urlencoded.js'
 import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
+import axios from 'axios'
+import { chatRouter } from './routes/chatRouter.js'
 
 export const createAPP = (
   {
@@ -22,6 +24,7 @@ export const createAPP = (
   app.use(urlencodedMiddleware())
   app.use(cookieParser(COOKIE_SECRET_KEY))
   app.use('/public', express.static('public'))
+  app.use('/chat', chatRouter)
 
   app.set('view engine', 'ejs')
   app.set('views', 'public/views')
@@ -36,12 +39,13 @@ export const createAPP = (
     res.render('login')
   })
 
-  app.get('/chat', (req, res) => {
+  app.get('/chat', async (req, res) => {
     authLogin(req, res)
 
     io.emit('open chat service', { data: {} })
+    const data = await axios.post()
 
-    res.render('index', { theme: ['Light', 'Dark'][1] })
+    res.render('index', { theme: ['Light', 'Dark'][1], data: [...data] })
   })
 
   app.get('/r', (req, res) => {
