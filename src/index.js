@@ -29,9 +29,29 @@ export const createAPP = (
   app.set('view engine', 'ejs')
   app.set('views', 'public/views')
 
-  app.get('/', (req, res) => {
-    authLogin(req, res)
+  const authLogin = (req, res, next) => {
+    const token = req.cookies.refeshToken
 
+    if (!token) {
+      res.redirect('/login')
+    } else {
+      try {
+        if (!jwt.verify(token, JWT_SECRET_KEY)) {
+          res.redirect('/login')
+        } else next()
+      } catch (e) {
+        res.clearCookie('refeshToken', {
+          sign: true,
+          httpOnly: true,
+          secure: true,
+          sameSite: 'Strict'
+        })
+        res.redirect('/login')
+      }
+    }
+  }
+
+  app.get('/', authLogin, (req, res) => {
     res.redirect('/chat')
   })
 
@@ -39,11 +59,17 @@ export const createAPP = (
     res.render('login')
   })
 
-  app.get('/chat', async (req, res) => {
-    authLogin(req, res)
+  app.get('/chat', authLogin, async (req, res) => {
+    const token = req.cookies.refeshToken
+    const decoded = jwt.verify(token, JWT_SECRET_KEY)
+    console.log(decoded)
 
     io.emit('open chat service', { data: {} })
-    const data = await axios.post()
+    const data = await axios.post('/chat/getChats', {
+      body: {
+
+      }
+    })
 
     res.render('index', { theme: ['Light', 'Dark'][1], data: [...data] })
   })
@@ -96,26 +122,4 @@ export const createAPP = (
   server.listen(PORT, () => {
     console.log(`Server running on PORT ${PORT}`)
   })
-
-  const authLogin = (req, res) => {
-    const token = req.cookies.refeshToken
-
-    if (!token) {
-      res.redirect('/login')
-    }
-
-    try {
-      if (!jwt.verify(token, JWT_SECRET_KEY)) {
-        res.redirect('/login')
-      }
-    } catch (e) {
-      res.clearCookie('refeshToken', {
-        sign: true,
-        httpOnly: true,
-        secure: true,
-        sameSite: 'Strict'
-      })
-      res.redirect('/login')
-    }
-  }
 }
