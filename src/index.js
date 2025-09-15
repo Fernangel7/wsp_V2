@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
 import { chatRouter } from './routes/chatRouter.js'
+import { authLogin, LoggedRedirection } from './middlewares/authLogin.js'
 
 export const createAPP = (
   {
@@ -29,33 +30,11 @@ export const createAPP = (
   app.set('view engine', 'ejs')
   app.set('views', 'public/views')
 
-  const authLogin = (req, res, next) => {
-    const token = req.cookies.refeshToken
-
-    if (!token) {
-      res.redirect('/login')
-    } else {
-      try {
-        if (!jwt.verify(token, JWT_SECRET_KEY)) {
-          res.redirect('/login')
-        } else next()
-      } catch (e) {
-        res.clearCookie('refeshToken', {
-          sign: true,
-          httpOnly: true,
-          secure: true,
-          sameSite: 'Strict'
-        })
-        res.redirect('/login')
-      }
-    }
-  }
-
   app.get('/', authLogin, (req, res) => {
     res.redirect('/chat')
   })
 
-  app.get('/login', (req, res) => {
+  app.get('/login', LoggedRedirection, (req, res) => {
     res.render('login')
   })
 
@@ -84,7 +63,7 @@ export const createAPP = (
     res.redirect('/')
   })
 
-  app.post('/signin', (req, res) => {
+  app.post('/signin', LoggedRedirection, (req, res) => {
     res.cookie('refeshToken', jwt.sign({
       ...req.body
     }, JWT_SECRET_KEY), {
@@ -98,7 +77,7 @@ export const createAPP = (
     res.redirect('/')
   })
 
-  app.post('/signup', (req, res) => {
+  app.post('/signup', LoggedRedirection, (req, res) => {
     //  asd
   })
 
