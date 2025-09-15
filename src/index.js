@@ -1,17 +1,18 @@
+import express from 'express'
+import { createServer } from 'node:http'
+import { Server } from 'socket.io'
+import corsMiddleware, { ACCEPTED_ORIGINS } from './middlewares/cors.js'
+import jsonMiddleware from './middlewares/json.js'
+import urlencodedMiddleware from './middlewares/urlencoded.js'
+import cookieParser from 'cookie-parser'
+import jwt from 'jsonwebtoken'
+
 export const createAPP = (
   {
-    express,
-    createServer,
-    Server,
-    corsMiddleware,
-    ACCEPTED_ORIGINS,
-    jsonMiddleware,
-    urlencodedMiddleware,
-    cookieParser,
-    jwt,
     JWT_SECRET_KEY,
     COOKIE_SECRET_KEY,
-    PORT
+    PORT,
+    userModel
   }
 ) => {
   const app = express()
@@ -20,6 +21,7 @@ export const createAPP = (
   app.use(jsonMiddleware())
   app.use(urlencodedMiddleware())
   app.use(cookieParser(COOKIE_SECRET_KEY))
+  app.use('/public', express.static('public'))
 
   app.set('view engine', 'ejs')
   app.set('views', 'public/views')
