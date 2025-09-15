@@ -235,7 +235,7 @@
         <div class="flip-card__inner">
             <div class="flip-card__front">
                 <div class="title">Iniciar sesión</div>
-                <form class="flip-card__form" id="login-form" method="post">
+                <form class="flip-card__form" id="login-form">
                     <input class="flip-card__input login_username" name="username" placeholder="Nombre de Usuario" type="text">
                     <input class="flip-card__input login_password" name="password" placeholder="Contraseña" type="password">
                     <button class="flip-card__btn" id="login_btn" type="submit">¡Vamos!</button>
@@ -246,7 +246,7 @@
             </div>
             <div class="flip-card__back">
                 <div class="title">Registrarse</div>
-                <form class="flip-card__form" id="register-form" method="post">
+                <form class="flip-card__form" id="register-form">
                     <input class="flip-card__input" name="fullname" placeholder="Nombre" type="text">
                     <input class="flip-card__input" name="email" placeholder="Correo electrónico" type="email">
                     <input class="flip-card__input" name="password" placeholder="Contraseña" type="password">
@@ -258,7 +258,7 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
         import axios from 'axios';
 
         const toRegister = document.getElementById('to-register');
