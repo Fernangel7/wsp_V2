@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken'
 import axios from 'axios'
 import { chatRouter } from './routes/chatRouter.js'
 import { authLogin, LoggedRedirection } from './middlewares/authLogin.js'
-
+import path from 'node:path'
 export const createAPP = (
   {
     JWT_SECRET_KEY,
@@ -28,7 +28,7 @@ export const createAPP = (
   app.use('/chat', chatRouter)
 
   app.set('view engine', 'ejs')
-  app.set('views', 'public/views')
+  app.set('views', path.join('public', 'views'))
 
   app.get('/', authLogin, (req, res) => {
     res.redirect('/chat')
