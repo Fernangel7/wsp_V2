@@ -5,6 +5,10 @@
         "node_modules/",
         ".git/",
         ".env",
-        "README.md"
+        "README.md",
+        "LICENSE",
+        ".gitignore",
+        "nodemon.json",
+        ".gitatributes"
     ]
 }
