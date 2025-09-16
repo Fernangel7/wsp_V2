@@ -7,6 +7,7 @@
   <title>Login wspv2</title>
   <!-- <link rel="icon" href="/esaw/vid-user-logo-defaul/zypherr(1).png"> -->
   <link rel="stylesheet" href="/public/css/login.css">
+  <link rel="stylesheet" href="/public/css/lib/sweetalert2.min.css">
 </head>
 
 <body>
@@ -17,29 +18,31 @@
     <div class="flip-card__inner">
       <div class="flip-card__front">
         <div class="title">Iniciar sesión</div>
-        <div class="flip-card__form" id="login-form">
+        <form class="flip-card__form" id="login-form">
           <input class="flip-card__input login_username" name="username" placeholder="Nombre de Usuario" type="text">
           <input class="flip-card__input login_password" name="password" placeholder="Contraseña" type="password">
           <button class="flip-card__btn" id="login_btn" type="submit">¡Vamos!</button>
-        </div>
+        </form>
         <div class="span" id="to-register">¿No tienes cuenta? Regístrate</div>
         <!-- Enlace Olvidé mi contraseña -->
         <div class="forgot-password" id="forgot-password">¿Olvidaste tu contraseña?</div>
       </div>
       <div class="flip-card__back">
         <div class="title">Registrarse</div>
-        <div class="flip-card__form" id="register-form">
+        <form class="flip-card__form" id="register-form">
           <input class="flip-card__input" name="fullname" placeholder="Nombre" type="text">
           <input class="flip-card__input" name="email" placeholder="Correo electrónico" type="email">
           <input class="flip-card__input" name="password" placeholder="Contraseña" type="password">
           <input class="flip-card__input" type="password" name="confirmpassword" id="confirm-password" placeholder="Repite tu contraseña">
           <button class="flip-card__btn" id="signin_btn" type="submit">¡Confirmar!</button>
-        </div>
+        </form>
         <div class="span" id="to-login">¿Ya tienes cuenta? Inicia sesión</div>
       </div>
     </div>
   </div>
 
+  <script type="module" src="/public/js/lib/axios.min.js"></script>
+  <script type="module" src="/public/js/lib/sweetalert2.all.min.js"></script>
   <script type="module" src="/public/js/login.js"></script>
 
 </body>
