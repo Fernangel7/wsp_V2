@@ -29,6 +29,8 @@ body {
     height: 450px;
     border-radius: 20px;
     font-family: 'Roboto', sans-serif;
+
+    scale: 1;
 }
 
 ::placeholder {
@@ -129,7 +131,7 @@ body {
     background-color: transparent;
     perspective: 1000px;
     text-align: center;
-    transition: transform 0.8s;
+    transition: all 0.8s;
     transform-style: preserve-3d;
 }
 
